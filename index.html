@@ -43,10 +43,12 @@
     .progress-card {
       background: #2f2f2f;
       border-radius: 12px;
-      padding: 24px;
+      padding: 24px 24px 40px 24px;
       border: 1px solid #404040;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      min-height: 200px;
     }
 
     .progress-card:hover {
@@ -151,21 +153,23 @@
     }
 
     .completion-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 4px;
-      background: linear-gradient(135deg, #00c851, #007e33);
+      width: 24px;
+      height: 24px;
+      background: linear-gradient(135deg, #ff6b9d, #c44d9f, #8b5fbf);
       color: white;
-      padding: 4px 8px;
-      border-radius: 12px;
-      font-size: 10px;
+      border-radius: 50%;
+      font-size: 12px;
       font-weight: 600;
-      margin-top: 12px;
       opacity: 0;
       transform: scale(0.8);
       transition: all 0.3s ease;
-      width: 100%;
+      box-shadow: 0 2px 8px rgba(255, 107, 157, 0.3);
     }
 
     .completion-badge.show {
@@ -174,8 +178,9 @@
     }
 
     .completion-badge::before {
-      content: '✨';
-      font-size: 12px;
+      content: '✓';
+      font-size: 14px;
+      font-weight: 700;
     }
 
     /* Responsive design */
@@ -228,9 +233,7 @@
         </div>
       </div>
       
-      <div class="completion-badge" id="completionBadge1">
-        Project Complete!
-      </div>
+      <div class="completion-badge" id="completionBadge1"></div>
     </div>
 
     <!-- Card 2 -->
@@ -260,9 +263,7 @@
         </div>
       </div>
       
-      <div class="completion-badge" id="completionBadge2">
-        Project Complete!
-      </div>
+      <div class="completion-badge" id="completionBadge2"></div>
     </div>
 
     <!-- Card 3 -->
@@ -292,9 +293,7 @@
         </div>
       </div>
       
-      <div class="completion-badge" id="completionBadge3">
-        Project Complete!
-      </div>
+      <div class="completion-badge" id="completionBadge3"></div>
     </div>
   </div>
 
