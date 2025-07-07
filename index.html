@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Enhanced Gradient Progress Bar</title>
+  <title>Progress Grid</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
     
@@ -24,76 +24,50 @@
       padding: 20px;
     }
 
-    .progress-wrapper {
-      background: #2f2f2f;
-      border-radius: 12px;
-      padding: 36px;
-      border: 1px solid #404040;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-      max-width: 480px;
+    .progress-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 900px;
       width: 100%;
-      transform: translateY(20px);
       opacity: 0;
       animation: slideIn 0.8s ease-out forwards;
-      position: relative;
-    }
-
-    .progress-wrapper::before,
-    .progress-wrapper::after {
-      display: none;
-    }
-
-    @keyframes glassReflection {
-      0%, 100% { transform: translateX(-100%) rotate(45deg); }
-      50% { transform: translateX(100%) rotate(45deg); }
     }
 
     @keyframes slideIn {
       to {
-        transform: translateY(0);
         opacity: 1;
       }
     }
 
-    @keyframes shimmer {
-      0% {
-        transform: translateX(-100%);
-        opacity: 0.5;
-      }
-      50% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateX(100%);
-        opacity: 0.5;
-      }
+    .progress-card {
+      background: #2f2f2f;
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid #404040;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    @keyframes glassReflection {
-      0%, 100% { 
-        transform: translateX(-100%) translateY(-100%) rotate(45deg); 
-        opacity: 0;
-      }
-      50% { 
-        transform: translateX(100%) translateY(100%) rotate(45deg); 
-        opacity: 1;
-      }
+    .progress-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     }
 
-    .progress-header {
+    .card-header {
       text-align: center;
-      margin-bottom: 32px;
+      margin-bottom: 20px;
     }
 
-    .progress-title {
-      font-size: 26px;
+    .card-title {
+      font-size: 18px;
       font-weight: 700;
       color: #ffffff;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
 
-    .progress-subtitle {
-      font-size: 16px;
+    .card-subtitle {
+      font-size: 13px;
       color: #a0a0a0;
       font-weight: 500;
     }
@@ -101,11 +75,11 @@
     .progress-container {
       position: relative;
       width: 100%;
-      height: 14px;
+      height: 8px;
       background: #404040;
-      border-radius: 14px;
+      border-radius: 8px;
       overflow: hidden;
-      margin: 28px 0;
+      margin: 16px 0;
       border: 1px solid #505050;
     }
 
@@ -114,39 +88,25 @@
       width: 0%;
       background: linear-gradient(
         90deg,
-        #10b981 0%,
-        #059669 25%,
-        #047857 50%,
-        #065f46 75%,
-        #064e3b 100%
+        #ff6b9d 0%,
+        #e060a7 25%,
+        #c44d9f 50%,
+        #a73c8f 75%,
+        #8b5fbf 100%
       );
-      border-radius: 14px;
-      position: relative;
+      border-radius: 8px;
       transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .progress-bar::after {
-      display: none;
-    }
-
-    @keyframes shimmer {
-      0% {
-        transform: translateX(-100%);
-      }
-      100% {
-        transform: translateX(100%);
-      }
     }
 
     .progress-info {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 20px;
+      margin-top: 12px;
     }
 
     .progress-percentage {
-      font-size: 36px;
+      font-size: 24px;
       font-weight: 800;
       background: linear-gradient(135deg, #ff6b9d, #c44d9f, #8b5fbf);
       -webkit-background-clip: text;
@@ -155,55 +115,57 @@
     }
 
     .progress-status {
-      font-size: 14px;
+      font-size: 11px;
       font-weight: 600;
       color: #a0a0a0;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
+      letter-spacing: 0.6px;
     }
 
     .progress-details {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-top: 28px;
-      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 16px;
+      padding-top: 16px;
       border-top: 1px solid #404040;
     }
 
     .detail-item {
       text-align: center;
+      flex: 1;
     }
 
     .detail-value {
-      font-size: 22px;
+      font-size: 16px;
       font-weight: 700;
       color: #ffffff;
-      margin-bottom: 6px;
+      margin-bottom: 2px;
     }
 
     .detail-label {
-      font-size: 13px;
+      font-size: 10px;
       color: #808080;
       text-transform: uppercase;
-      letter-spacing: 0.6px;
+      letter-spacing: 0.5px;
       font-weight: 500;
     }
 
     .completion-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      justify-content: center;
+      gap: 4px;
       background: linear-gradient(135deg, #00c851, #007e33);
       color: white;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 14px;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 10px;
       font-weight: 600;
-      margin-top: 16px;
+      margin-top: 12px;
       opacity: 0;
       transform: scale(0.8);
       transition: all 0.3s ease;
+      width: 100%;
     }
 
     .completion-badge.show {
@@ -213,101 +175,161 @@
 
     .completion-badge::before {
       content: '✨';
-      font-size: 16px;
+      font-size: 12px;
     }
 
     /* Responsive design */
-    @media (max-width: 480px) {
-      .progress-wrapper {
-        padding: 24px;
-        margin: 16px;
-      }
-      
-      .progress-title {
-        font-size: 20px;
-      }
-      
-      .progress-percentage {
-        font-size: 28px;
-      }
-      
-      .progress-details {
+    @media (max-width: 768px) {
+      .progress-grid {
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: 16px;
+        max-width: 400px;
+      }
+      
+      .progress-card {
+        padding: 20px;
       }
     }
 
-    /* Dark mode support */
-    @media (prefers-color-scheme: dark) {
-      .progress-wrapper {
-        background: rgba(0, 0, 0, 0.25);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-      }
-      
-      .progress-container {
-        background: rgba(0, 0, 0, 0.3);
+    @media (max-width: 1024px) and (min-width: 769px) {
+      .progress-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 600px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="progress-wrapper">
-    <div class="progress-header">
-      <div class="progress-title">Progress Tracker</div>
-      <div class="progress-subtitle">Monitoring your journey</div>
-    </div>
-    
-    <div class="progress-container">
-      <div class="progress-bar" id="progressBar"></div>
-    </div>
-    
-    <div class="progress-info">
-      <div class="progress-percentage" id="percentage">0%</div>
-      <div class="progress-status" id="status">In Progress</div>
-    </div>
-    
-    <div class="progress-details">
-      <div class="detail-item">
-        <div class="detail-value" id="completedSteps">0</div>
-        <div class="detail-label">Completed</div>
+  <div class="progress-grid">
+    <!-- Card 1 -->
+    <div class="progress-card">
+      <div class="card-header">
+        <div class="card-title">Project Alpha</div>
+        <div class="card-subtitle">Development Phase</div>
       </div>
-      <div class="detail-item">
-        <div class="detail-value" id="remainingSteps">10</div>
-        <div class="detail-label">Remaining</div>
+      
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBar1"></div>
+      </div>
+      
+      <div class="progress-info">
+        <div class="progress-percentage" id="percentage1">0%</div>
+        <div class="progress-status" id="status1">Not Started</div>
+      </div>
+      
+      <div class="progress-details">
+        <div class="detail-item">
+          <div class="detail-value" id="completedSteps1">0</div>
+          <div class="detail-label">Done</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-value" id="remainingSteps1">8</div>
+          <div class="detail-label">Left</div>
+        </div>
+      </div>
+      
+      <div class="completion-badge" id="completionBadge1">
+        Project Complete!
       </div>
     </div>
-    
-    <div class="completion-badge" id="completionBadge">
-      Congratulations! Task Complete
+
+    <!-- Card 2 -->
+    <div class="progress-card">
+      <div class="card-header">
+        <div class="card-title">Project Beta</div>
+        <div class="card-subtitle">Testing Phase</div>
+      </div>
+      
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBar2"></div>
+      </div>
+      
+      <div class="progress-info">
+        <div class="progress-percentage" id="percentage2">0%</div>
+        <div class="progress-status" id="status2">Not Started</div>
+      </div>
+      
+      <div class="progress-details">
+        <div class="detail-item">
+          <div class="detail-value" id="completedSteps2">0</div>
+          <div class="detail-label">Done</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-value" id="remainingSteps2">5</div>
+          <div class="detail-label">Left</div>
+        </div>
+      </div>
+      
+      <div class="completion-badge" id="completionBadge2">
+        Project Complete!
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="progress-card">
+      <div class="card-header">
+        <div class="card-title">Project Gamma</div>
+        <div class="card-subtitle">Planning Phase</div>
+      </div>
+      
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBar3"></div>
+      </div>
+      
+      <div class="progress-info">
+        <div class="progress-percentage" id="percentage3">0%</div>
+        <div class="progress-status" id="status3">Not Started</div>
+      </div>
+      
+      <div class="progress-details">
+        <div class="detail-item">
+          <div class="detail-value" id="completedSteps3">0</div>
+          <div class="detail-label">Done</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-value" id="remainingSteps3">12</div>
+          <div class="detail-label">Left</div>
+        </div>
+      </div>
+      
+      <div class="completion-badge" id="completionBadge3">
+        Project Complete!
+      </div>
     </div>
   </div>
 
   <script>
     function getProgressFromURL() {
       const params = new URLSearchParams(window.location.search);
-      let val = parseInt(params.get("value")) || parseInt(params.get("progress")) || 0;
       
-      // Clamp value between 0 and 100
-      val = Math.max(0, Math.min(100, val));
-      return val;
+      // Get individual card values or use a single value for all
+      const value1 = parseInt(params.get("value1")) || parseInt(params.get("value")) || 0;
+      const value2 = parseInt(params.get("value2")) || parseInt(params.get("value")) || 0;
+      const value3 = parseInt(params.get("value3")) || parseInt(params.get("value")) || 0;
+      
+      return {
+        card1: Math.max(0, Math.min(100, value1)),
+        card2: Math.max(0, Math.min(100, value2)),
+        card3: Math.max(0, Math.min(100, value3))
+      };
     }
 
-    function updateProgress(percentage) {
-      const progressBar = document.getElementById('progressBar');
-      const percentageElement = document.getElementById('percentage');
-      const statusElement = document.getElementById('status');
-      const completedSteps = document.getElementById('completedSteps');
-      const remainingSteps = document.getElementById('remainingSteps');
-      const completionBadge = document.getElementById('completionBadge');
+    function updateProgress(cardNumber, percentage) {
+      const progressBar = document.getElementById(`progressBar${cardNumber}`);
+      const percentageElement = document.getElementById(`percentage${cardNumber}`);
+      const statusElement = document.getElementById(`status${cardNumber}`);
+      const completedSteps = document.getElementById(`completedSteps${cardNumber}`);
+      const remainingSteps = document.getElementById(`remainingSteps${cardNumber}`);
+      const completionBadge = document.getElementById(`completionBadge${cardNumber}`);
       
       // Animate progress bar
       setTimeout(() => {
         progressBar.style.width = percentage + '%';
-      }, 500);
+      }, 300 + (cardNumber * 200)); // Stagger the animations
       
       // Animate percentage counter
       let currentPercentage = 0;
-      const increment = percentage / 50; // 50 frames for smooth animation
+      const increment = percentage / 40;
       
       const percentageInterval = setInterval(() => {
         currentPercentage += increment;
@@ -316,17 +338,17 @@
           clearInterval(percentageInterval);
         }
         percentageElement.textContent = Math.round(currentPercentage) + '%';
-      }, 20);
+      }, 25);
       
       // Update status
       if (percentage === 0) {
         statusElement.textContent = 'Not Started';
       } else if (percentage < 25) {
-        statusElement.textContent = 'Getting Started';
+        statusElement.textContent = 'Starting';
       } else if (percentage < 50) {
-        statusElement.textContent = 'Making Progress';
+        statusElement.textContent = 'In Progress';
       } else if (percentage < 75) {
-        statusElement.textContent = 'Halfway There';
+        statusElement.textContent = 'Halfway';
       } else if (percentage < 100) {
         statusElement.textContent = 'Almost Done';
       } else {
@@ -334,8 +356,8 @@
         completionBadge.classList.add('show');
       }
       
-      // Update step counters (assuming 10 total steps)
-      const totalSteps = 10;
+      // Update step counters (different total steps per card)
+      const totalSteps = cardNumber === 1 ? 8 : cardNumber === 2 ? 5 : 12;
       const completed = Math.round((percentage / 100) * totalSteps);
       const remaining = totalSteps - completed;
       
@@ -346,13 +368,19 @@
     // Initialize progress on page load
     document.addEventListener('DOMContentLoaded', () => {
       const progress = getProgressFromURL();
-      updateProgress(progress);
+      
+      updateProgress(1, progress.card1);
+      updateProgress(2, progress.card2);
+      updateProgress(3, progress.card3);
     });
 
-    // Listen for URL changes (if embedded in an iframe)
+    // Listen for URL changes
     window.addEventListener('message', (event) => {
       if (event.data && event.data.type === 'updateProgress') {
-        updateProgress(event.data.value);
+        const { card1, card2, card3 } = event.data;
+        if (card1 !== undefined) updateProgress(1, card1);
+        if (card2 !== undefined) updateProgress(2, card2);
+        if (card3 !== undefined) updateProgress(3, card3);
       }
     });
   </script>
